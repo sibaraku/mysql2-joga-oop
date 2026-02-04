@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 
 const app = express()
 
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 const articleControllerClass = require('./controllers/article.js')
@@ -11,8 +11,7 @@ const articleController = new articleControllerClass()
 const authorRouter = require('./routers/authors.js');
 
 const articleRouters = require('./routers/articles.js')
-app.use('/', articleRouters)
-app.use('/author/', authorRouter);
+app.use('/articles', articleRouters);
 app.use('/author/', authorRouter);
 
 app.listen(3025, () => {

@@ -15,6 +15,27 @@ class articleController {
         const result = await super.findMany('author_id', author.id);
         return result;
     }
+
+    async getArticleBySlug(req, res) {
+        const article =  await articleModel.findOne(req.params.slug);
+        res.status(201).json({ article: article });
+    }
+
+    async createNewArticle(req, res) {
+        const newArticle = {
+            name: req.body.name,
+            slug: req.body.slug,
+            image: req.body.image,
+            body: req.body.body,
+            published: new Date().toISOString().slice(0, 19).replace('T', ' '),
+            author_id: req.body.author_id
+        } 
+        const newArticleId = await articleModel.create(newArticle);
+        res.status(201).json({ 
+            message: `Created article with id ${newArticleId}`, 
+            article:{ id: newArticleId, ...newArticle } 
+        });
+    }
 }
 
 module.exports = articleController;

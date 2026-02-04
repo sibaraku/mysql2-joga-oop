@@ -5,12 +5,14 @@ const authorModel = new AuthorDbModel();
 const articleModel = new ArticleDbModel();
 
 class authorController {
-    async getAuthorById(req, res) {
-            const author = await authorModel.findById(req.params.author_id);
-            const articles = await articleModel.findMany(author);
-            author.articles = articles;
-            res.status(201).json({author: author } );
-    }
+  async getAuthorById(req, res) {
+    const author = await authorModel.findById(req.params.author_id);
+
+    const articles = await articleModel.findByAuthorId(author.id);
+    author.articles = articles;
+
+    res.status(200).json({ author });
+  }
 }
 
 module.exports = authorController;

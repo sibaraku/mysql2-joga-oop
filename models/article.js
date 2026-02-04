@@ -18,6 +18,11 @@ class articleModel extends BaseSQLModel {
   async findByAuthorId(authorId) {
     return await super.findMany('author_id', authorId);
   }
+
+  async create(article) {
+    const creayedArticleId = await super.create(article);
+    return creayedArticleId;
+  }
 }
 
 module.exports = articleModel;
