@@ -16,4 +16,8 @@ router.post('/', (req, res) =>
   articleController.createNewArticle(req, res)
 );
 
+router.put('/edit/:id', (req, res) =>
+  articleController.updateArticle(req, res)
+);
+
 module.exports = router;

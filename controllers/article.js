@@ -36,6 +36,25 @@ class articleController {
             article:{ id: newArticleId, ...newArticle } 
         });
     }
+
+    async updateArticle(req, res) {
+        const articleId = req.params.id;
+        const articleData = {
+            name: req.body.name,
+            slug: req.body.slug,
+            image: req.body.image,
+            body: req.body.body,
+            author_id: req.body.author_id
+        };
+
+        const affectedRows = await articleModel.update(articleId, articleData);
+
+        res.status(200).json({
+        message: 'Article updated successfully',
+        affectedRows,
+        article: { id: articleId, ...articleData }
+        });
+    }
 }
 
 module.exports = articleController;
