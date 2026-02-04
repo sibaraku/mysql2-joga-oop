@@ -8,9 +8,12 @@ app.use(bodyParser.json())
 
 const articleControllerClass = require('./controllers/article.js')
 const articleController = new articleControllerClass()
+const authorRouter = require('./routers/authors.js');
 
-const articleRouters = require('./routes/articles.js')
+const articleRouters = require('./routers/articles.js')
 app.use('/', articleRouters)
+app.use('/author/', authorRouter);
+app.use('/author/', authorRouter);
 
 app.listen(3025, () => {
   console.log('Server is running on http://localhost:3025')

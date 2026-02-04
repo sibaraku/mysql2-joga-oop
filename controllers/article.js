@@ -11,9 +11,9 @@ class articleController {
         res.status(201).json({ articles: articles });
     }
 
-    async getArticleBySlug(req, res) {
-        const article = await articleModel.findOne(req.params.slug);
-        res.status(201).json({ articles: article });
+    async findMany(author) {
+        const result = await super.findMany('author_id', author.id);
+        return result;
     }
 }
 
