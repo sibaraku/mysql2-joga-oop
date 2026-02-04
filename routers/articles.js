@@ -20,4 +20,8 @@ router.put('/edit/:id', (req, res) =>
   articleController.updateArticle(req, res)
 );
 
+router.delete('/delete/:id', (req, res) =>
+  articleController.deleteArticle(req, res)
+);
+
 module.exports = router;
